@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        fieldset{width:300px; height:80px; background-color: rgb(203, 233, 253);}
+        legend{width:65px; height:25px; background-color: rgb(160, 200, 253);}
+        input[type='button']{background: #efefef; width:100px; height:25px;
+        border:1px solid #b4b4b4}
+        /* hover : 마우스 커서가 올라갈 때 */
+        input[type='button']:hover{background:#fbdede; border:1px solid #ff8080}
+    </style>
+</head>
+<body>
+    <h1>회원가입</h1>
+    <form action="#" method="get">
+
+        <!--autofocus:실행시 커서를 자동이동-->
+        <!--placefocus:입력창 도움말-->
+        <!--value값을 지정하면 미리 입력되어있음.-->
+        <!--readonly를 같이 사용하면 수정 불가-->
+        <!--required : 필수입력-->
+        <label>아이디</label>
+        <input type="text" name="id" value="admin" autofocus><br>
+        <!---->
+        <label>비밀번호</label>
+        <input type="password" required name="pw"><br>
+        <label>비밀번호 확인</label>
+        <input type="password" required name="pw2"><br>
+        <label>이름</label>
+        <input type="text" required name="name"><br><br>
+
+        <fieldset>
+            <legend>성별</legend>
+            <label>하나만 선택하시오.</label><br>
+            <!--radio : 하나만 선택 가능. 복수선택 불가-->
+            <!-- checked가 들어가 있으면 이미 체크되어있음.-->
+            <input type="radio" id="man" name="gender" value="남자">
+            <label for="man">남자</label>
+            <input type="radio" id="woman" name="gender" value="여자">
+            <label for="man">여자</label>
+            <input type="radio" id="neuter" name="gender" value="중성">
+            <label for="man">중성</label><br>
+        </fieldset><br>
+    
+
+        <fieldset>
+            <legend>취미</legend>
+            <label>복수 선택 가능합니다.</label><br>
+            <!--checkbox : 중복선택 가능-->
+            <!--hobby[0]='게임' hobbr[1]='독서'-->
+            <input type="checkbox" id="game" name="hobby" value="게임">
+            <label for="run">게임</label>
+            <input type="checkbox" checked id="book" name="hobby" value="독서">
+            <label for="book">독서</label>
+            <input type="checkbox" id="run" name="hobby" value="조깅">
+            <label for="run">조깅</label>
+            <input type="checkbox" id="swim" name="hobby" value="수영">
+            <label for="swim">수영</label><br><br>
+            <!-- radio와 checkbox는 항상 value가 있어야한다.-->
+        </fieldset><br>
+
+        <fieldset>
+            <legend>전공 선택</legend>
+            <label>전공을 선택하세요.</label><br>
+            <select name="major">
+                <!-- selected도 cheㅊked와 같은 효과-->
+                <option value="#">전공선택</option>
+                <option value="com">컴퓨터공학</option>
+                <option value="kid">유아교육</option>
+                <option value="art" selected>조소</option>
+                <option value="history">역사학</option>
+                <option value="fashion">패션디자인</option>
+            </select><br>
+        </fieldset><br>
+    
+    
+    
+        
+        <label>날짜</label>
+        <input type="date" name="day">
+        <label>날짜시간</label><br>
+        <input type="datetime-local" name="daytime">
+        <br>
+        <input type="file" name="nfile">
+
+        <br><br>
+        <!--textarea : 텍스트를 입력 가능-->
+        <!--cols : 가로길이, rows : 세로길이-->
+        <textarea name="content" cols="80"></textarea>
+        <br><br><br>
+        <input type="button" value="회원가입">
+        <input type="reset" value="취소지우기">
+    </form>
+</body>
+</html>
