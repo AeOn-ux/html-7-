@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css</title>
+    <style>
+        
+        /* 선택자 우선순위 0.인라인선택자, 1. id 선택자, 2. clss 선택자, 3. 태그선택자, 4. 전체선택자 */
+        /* 전체선택자 */
+        *{padding:0; margin:0;}
+        /* 태그선택자 */
+        h1{color:blue;}
+        p{font-size: 20px;}
+        /* 클래스 선택자 : 여러곳에 적용할 때 사용하는 선택자 */
+        .c_all{background: yellow;}
+        /* id 선택자 - 유일한 곳에 적용할때 사용하는 선택자, 1개 적용 가능 */
+        #tit{color:red;}
+        span{color:green;}
+
+    </style>
+</head>
+<body>
+
+    <h1 id="tit">251110 뉴스기사</h1>
+    <h1 class="c_all">15세 미만 SNS 금지하는 덴마크…미성년자 규제 확산 [친절한 IT]</h1>
+    <p><span>덴마크 정부가 15세 미만의 소셜미디어(SNS) 사용을 전면 금지한다. 미성년자들의 유해 콘텐츠 노출도에 대한 우려가 커지는 가운데 빅테크를 겨냥한 각국 SNS 규제 압박이 거세지고 있다는 분석이 나온다.</p>
+    </span><hr>
+    <h1>전장연 출근길 탑승 시위…4호선 열차 운행 12분 지연</h1>
+    <p class="c_all">[서울=뉴시스] 조성하 기자 = 10일 오전 전국장애인차별철폐연대(전장연)의 시위로 지하철 4호선 열차 운행이 일부 지연됐다.</p>
+    <hr>
+    <h1>KAIST, 癌 전이 ‘세포 이동 비밀’ 풀었다</h1>
+    <p class="c_all">[헤럴드경제=구본혁 기자] 우리 몸에 생긴 암세포가 다른 부위로 퍼지는 암 전이나, 상처를 치유하기 위해 면역세포가 이동하는 과정 등 세포의 이동은 생명현상에 꼭 필요한 과정이다. 그러나 그동안 세포가 외부 자극 없이 스스로 이동 방향을 결정하는 원리는 밝혀지지 않았다.</p>
+    <hr>
+
+</body>
+</html>
