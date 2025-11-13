@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>">
+    <title>Document</title>
+    <style>
+        a{text-decoration: none; color:inherit;}
+        input:focus{background: beige;}
+        input:disabled{background: pink;}
+        
+        input[type='checkbox'] {display: none;}
+        input[type='checkbox'] + label{width: 16px; height: 16px;
+               display: inline-block;
+              background: url(image/radio_off.jpg); }
+        input[type='checkbox']:checked + label{
+              background: url(image/radio_on.jpg); 
+            }
+
+    </style>
+    <script>
+        function loginBtn(){
+            alert("로그인 진행")
+            console.log("체크박스 개수 :", $("input[type='checkbox']").length)
+            console.log("체크 된 개수 :", $("input[type='checkbox']:checked").length)
+         /* 
+         console.log("아이디: ", $("#id").val());
+            console.log("비밀번호: ", $("#pw").val());
+            if($("#pw").val()==""){
+                alert("아이디를 입력하셔야 로그인이 가능합니다.");
+                $("#id").focus(); s
+                */
+            
+            }
+            
+        
+
+    </script>
+</head>
+<body>
+    <form action="#" method="post">
+        
+        <label>아이디</label>
+        <input type="text" name="id" id="id"><br>
+        <label>비밀번호</label>
+        <input type="password" name="pw" id="pw"><br>
+
+        <label>취미</label><br>
+        <input type="checkbox" name="hobby" id="game" value="game">
+        <label for="game"></label><span>게임</span>
+        <input type="checkbox" name="hobby" id="book" value="game">
+        <label for="book"></label>
+        <input type="checkbox" name="hobby" id="work" value="game">
+        <label for="work"></label><br>
+        <input type="button" onclick="loginBtn()" value="로그인"><br>
+
+
+    </form>
+    <ul>
+        <li><a href="http://www.naver.com">네이버</a></li>
+        <li><a href="http://www.google.co.kr">구글</a></li>
+        <li><a href="http://www.daum.net">다음</a></li>
+    </ul>
+</body>
+</html>

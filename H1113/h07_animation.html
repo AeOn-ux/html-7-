@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{padding:0; margin:0;}
+        div{width: 600px; height: 380px; border:1px solid black;
+        margin: 200px 400px; overflow: hidden;}
+        
+        /* translate:이동, scale:크기, rotate:회원, skew:기울기 */
+        img:hover{/*transform:rotate(360deg); 
+            transform-origin: left top; 
+            transform:skew(60deg);
+            transform:translate(50px 100px);
+            transform:scale(1.5);
+            perspective: 900; - 깊이감*/
+            perspective: 900; transform: rotateX(100deg); 
+            backface-visibility: hidden;
+            transition:2s; 
+                    }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="img/car1.png">
+
+    </div>
+</body>
+</html>
