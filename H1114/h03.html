@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리솜</title>
+    <style>
+        *{padding:0; margin:0;}
+        ol,ul{list-style: none;}
+        a{text-decoration: none; color: inherit;}
+        header{width: 100%; height: 121px; border-bottom:1px solid #f0f0f0;}
+        .menu{width: 1290px; height: 121px; margin:0 auto; 
+            display: flex; }
+        .logo{width: 132px; height:121px; display: flex; align-items: center;}
+        .logo img{width:132px; height: 45px; }
+
+        nav{width: 1158px; height:121px; }
+        .t-menu{height: 51px;  }
+        .t-menu ul{height: 51px; display: flex; justify-content: flex-end;
+                   align-items: center; font-size: 12px; 
+                   color:#8a8d8f; font-weight:400;}
+        .t-menu ul li:after{content:'|'; display: inline-block; font-size: 10px;
+                            color: #d3d3d3; margin:0 13px; }
+        .t-menu ul li:last-child:after{content:'';  margin:0 0 0 13px;}
+
+        .m-menu{height: 60px; }
+        .m-menu ul{height: 60px; display: flex;  align-items: center; box-sizing: border-box;
+                    font-size: 18px; font-weight: 590; justify-content: flex-end;}
+        .m-menu ul li{display: inline-block; margin: 13px; margin-left: 73px;
+        letter-spacing: 1px; height: 77px; line-height: 77px;}
+        .m-menu ul li:hover{ border-bottom: 3px solid #718929; color:#718929}
+
+         @keyframes bannermove{
+            from{min-width:-1000px; color:rgba(255, 255, 255, 0);}
+            to{min-width:100px; color:rgba(255, 255, 255, 1);} }
+
+        .banner{width: 100%; height: 820px; position: relative; 
+            background: url('image/img_re_main_slide_20230711_pc.png') no-repeat;}
+        .banner .b-txt{color:white; position: relative;  animation: bannermove 4s;
+             letter-spacing: -0.7px; text-align: center; top: 30%;}
+        .b-txt p{font-size: 20px; font-weight:500; letter-spacing: 3px;}
+        .b-txt h4{font-size: 48px; font-weight:600; padding-top:15px;}
+        .b-txt h6{font-size: 24px; font-weight:500; padding-top:25px;}
+        
+        
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="menu">
+            <div class="logo">
+                <img src="image/img_logo_re_forest.png">
+            </div>
+            <nav>
+                <div class="t-menu">
+                    <ul>
+                        <li>회원예약</li>
+                        <li>패키지 예약</li>
+                        <li>부대시설 예약</li>
+                        <li>회원가입</li>
+                        <li id="end">로그인</li>
+                    </ul>
+                </div>
+                <div class="m-menu">
+                    <ul>
+                        <li>포레스트</li>
+                        <li>스파</li>
+                        <li>객실</li>
+                        <li>특별한경험</li>
+                        <li>부대시설</li>
+                        <li>브랜드소개</li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- banner -->
+    <div class="banner">
+        <div class="b-txt">
+            <p>RE:O DAILY PROGRAM</p>
+            <h4>리오와 함께하는 즐거운 리조트 라이프</h4>
+            <h6>다양한 체험 액티비티를 직접 가이드하며 고객에게 즐거움을 선사하는<br>
+            리솜의 레저 엔터테인먼트 전문가 'RE:O'와 함께하세요.</h6>
+        </div>
+    </div>
+
+
+</body>
+</html>
