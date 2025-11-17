@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트</title>
+    <!-- 자바 스크립트 외부링크-->
+    <script src="js/script.js"></script>
+    <script>
+        document.write("hello<br>")
+    </script>
+</head>
+<body>
+    <script>
+        // 한 줄 주석, /* 여러 줄 주석 */
+        /* document.write("안녕하세요") - 화면출력
+        document.write("<h1>안녕하세요</h1>")
+        alert("경고창") */
+        // 입력창 : prompt("입력창")
+
+        // 변수선언 var, lash, const - 문자열, 숫자(정수, 실수), bool-boolean
+        // "태그로 인식"
+
+       /*  var num = 0;
+        document.write(num + "<br>");
+        var input = prompt("숫자를 입력하세요.>") // 입력창 
+        document.write("입력값 :", input + "<br>"); */
+
+        
+        // 확인질문창 confirm
+        let result = confirm("데이터를 삭제하시겠습니까?")
+        document.write("결과 :", result);
+
+        // 상수선언 const : 상수는 한 번 값이 정해지면 수정 불가, 사용은 가능.
+        const A = 10;
+        A = 20;
+        document.write("결과 :", A);
+
+        // 콘솔출력 - console.log()
+        console.log("콘솔창에 로그가 출력됨.")
+
+        // 타입확인 : typeof()
+
+        let a;
+        document.write(typeof(a), "<br>"); // 정의되지 않음 -undefined
+        let b = 100;
+        document.write(typeof(b), "<br>"); // 정수
+        let c = 1.5;
+        document.write(typeof(c), "<br>"); // 실수
+        let d = "안녕";
+        document.write(typeof(c), "<br>"); // 문자열
+    </script>
+</body>
+</html>

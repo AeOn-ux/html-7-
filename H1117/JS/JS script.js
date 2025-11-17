@@ -1,0 +1,1 @@
+document.write("바보<br>");
