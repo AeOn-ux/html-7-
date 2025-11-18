@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,th,td{border:1px solid black; border-collapse: collapse;}
+        th,td{width: 100px; height: 40px; text-align: center;}
+        #txt{width: 400px; height: 50px; border:1px solid black;}
+    </style>
+</head>
+<body>
+    <label> 출석부 </label>
+    <input type="text" id="name" onkeyup="keyBtn(event)">
+    <button type="button" onclick="saveBtn()">저장</button>
+    <div id="txt"></div>
+    <table>
+        <tr><th>명단</th></tr>
+        <tbody id="tbody">
+            <tr id="1"><td>이재명</td></tr>
+            <tr id="2"><td>트럼프</td></tr>
+            <tr id="3"><td>김정은</td></tr>
+        </tbody>
+    </table>
+    <script>
+        var arr = ['이재명','트럼프','김정은'];
+        document.querySelector("#txt").innerHTML = arr; // 위에 값을 div에 넣음
+
+        document.querySelector("#tbody")
+
+        function keyBtn(event){
+            if(event.keyCode == 13){ //enter키를 누르면
+                saveBtn(); //저장이 됨
+            }
+        }
+        function saveBtn(){ //저장
+            var name = document.querySelector("#name"). value; //이름을 입력하면
+            arr.push(document.querySelector("#name"). value); //출력이되는것을
+            console.log(arr); //콘솔창에 출력
+            document.querySelector("#txt").innerHTML = arr; //div에 입력값 출력
+        }
+
+    </script>
+</body>
+</html>
