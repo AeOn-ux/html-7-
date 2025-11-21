@@ -209,154 +209,60 @@ $(function(){
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-
-
-
-
 					<script>
-						// 전역 변수
-						let cno = 1;
-						let flag = 0;
-						let id;
-						let cdate;
-						let ccontent;
-						let cpw;
+						let cno = 2;
+						let flag = 0; // 신호값. 상태 꺼짐
 
 						$(function(){
 
-							// keyCode 함수
-							$(".replyTxt").keyup(function(e){
-								console.log(e.keyCode);
-								if(e.keyCode == 13)
-								$(this).closest("ul").find(".replyBtn").click();
-							});
+							// 1. 하단 댓글 추가 함수
+							$(".replyBtn").click(function(){ //replyBtn(등록)을 클릭하면
+								if(flag !=0){ // 상태가 켜지면/ 즉, 수정 저장이 완료되지 않으면.
+									alert("댓글 수정 화면을 닫아야 입력이 가능합니다.")
+									return; // 반복
 
-							// 1. 등록 버튼 클릭 함수
-							$(".replyBtn").click(function(){
-								if(flag !=0){
-									alert("댓글 수정 화면을 닫아야 수정이 가능합니다.")
-									return;
 								}
 
-								let ul = $(this).closest("ul");
-								// 댓글 내용 확인
-								if (ul.find(".replyType").val().length<=0){
-									alert("댓글 내용을 입력하셔야 저장이 가능합니다.");
-									ul.find(".replyType").focus();
-									return;
-								} // 댓글 정보
-								id = "aaa";
-								cpw = ul.find(".replynum").val();
-								ccontent = ul.find(".replyType").val();
-								cdate = todayTime();
-								// 댓글 출력
-								let dataHtml = ``;
+								let ul = $(this).closest("ul"); // 가장 가까운 ul을 내보낸다.
 								
-								dataHtml += `
-								<!-- 댓글 리스트 -->
-									<ul id="${cno}">
-										<li class="name">${id} <span>[${cdate}9]</span></li>
-										<li class="txt">${ccontent}</li>
-										<li class="btn">
-											<a class="rebtn updateBtn">수정</a>
-											<a class="rebtn deleteBtn">삭제</a>
-										</li>
-									</ul>`;
-								console.log(dataHtml)	
-								// 댓글 리스트 앞에 추가
-								$(".replyBox").prepend(dataHtml);
-								cno++; //1 증가
-								//댓글 총 개수 1 증가
-								
-								c_count(1); // 함수 호출 - 
-								ul.find(".replynum").val('');
-								ul.find(".replyType").val('');
-								alert("하단 댓글을 저장합니다.")
-								//console.log($(this).closest("ul").find(".replynum").val())
-								// 현재 위치점에서 가장 가까운 ul을 찾아서 .replynum을 찾아 그 안의 input값을 가져와라.
-								//console.log($(this).closest("ul").find(".replyType").val())
-							});//replyBtn
-							
-							// 2. 삭제 버튼 클릭 함수
-							$(document).on("click",".deleteBtn",function(){
-                                const ul = $(this).closest("ul");
-                                console.log(ul.attr("id"));
-                                if(confirm(ul.attr("id")+"번 댓글을 삭제하시겠습니까?")){ //attr:속성
-                                    ul.remove();
-                                }
-								// 함수 호출 - 댓글 총 개수 1 삭제
-								c_count(2); 
-                            });//deleteBtn
+								// 1) 댓글 내용 확인
+								if (ul.find(".replyType").val().length<=0){ // replyType의 textarea 값의 길이가 0보다 작거나 같을 때
+									alert("댓글 내용을 입력하셔야 저장이 가능합니다."); 
+									ul.find(".replyType").focus(); // 커서가 textarea로 이동.
+									return; // 반복
+								} 
 
-							// 3. 수정 버튼 클릭 함수
-							$(document).on("click",".updateBtn",function(){
-								if(flag !=0){
-									alert("다른 댓글 수정 화면을 닫아야 수정이 가능합니다.")
-									return;
-								}
-								alert("댓글을 수정합니다.")
-								const ul = $(this).closest("ul");
-                                console.log(ul.attr("id"));
+								// 2) 댓글 정보
+								id = "aaa"; // 아이디 
+								cpw = ul.find(".replynum").val(); // 부여받은 비밀번호 class 값을 끌고온다.
+								ccontent = ul.find(".replyType").val(); // 입력받은 문장 값(class)를 끌고온다.
+								cdate = todayTime(); // 날짜
 
-								// 데이터 가져오기 id, cno, cdate, txt
-								let id = ul.find(".name").text().split(" ")[0]
-								let cdate = ul.find("span").text()
-								let ccontent = (ul.find(".txt").text());
-
-								let dataHtml = `
-							
-								<li class="name">${id} <span>${cdate}</span></li>
-								<li class="txt"><textarea class="replyType">${ccontent}</textarea></li>
-								<li class="btn">
-									<a class="rebtn uSaveBtn">저장</a>
-									<a class="rebtn cancleBtn">취소</a>
-								</li>`;
-								// 수정 화면 태그 입력
-								$(this).closest("ul").html(dataHtml);
-								flag = 1; // 수정 화면이 열림
-							});//updateBtn
-
-							// 4. 수정 취소 버튼 클릭 함수
-							$(document).on("click",".cancleBtn",function(){
-								alert("수정취소버튼")
-								const ul = $(this).closest("ul");
-                                console.log(ul.attr("id"));
-								//기존 저장되어 있는 데이터 사용 - id, cdate, ccountent
-								let dataHtml = 
-								`<li class="name">${id} <span>[${cdate}9]</span></li>
-										<li class="txt">${ccontent}</li>
-										<li class="btn">
-											<a class="rebtn updateBtn">수정</a>
-											<a class="rebtn deleteBtn">삭제</a>
-										</li>`;
-								ul.html(dataHtml);
-								flag = 0; // 수정 화면 닫힘.
-							});//cancleBtn
-
-							// 5. 수정 저장 버튼 클릭 함수
-							$(document).on("click",".uSaveBtn",function(){
-								alert("댓글을 수정했습니다.")
-								const ul = $(this).closest("ul");
-                                // 수정 댓글 가져오기
-								console.log(ul.find(".replyType").val());
-								cdate = todayTime(); // 수정 날짜 추가
-								ccontent = ul.find(".replyType").val()
-								let dataHtml = 
+								// 3) 댓글 출력
+								let dataHtml = ``; // dataHtml에 변수 지정.
+								dataHtml += // 위와 같이 dataHtml에 값을 부여한다.
 								`
-								<li class="name">${id} <span>[${cdate}]</span></li>
-									<li class="txt">${ccontent}</li>
-									<li class="btn">
-										<a class="rebtn updateBtn">수정</a>
-										<a class="rebtn deleteBtn">삭제</a>
-									</li>
+								<!-- 댓글 양식 -->
+								 	<ul id = "${cno}"> // ul의 id에 cno 변수값을 넣는다. (댓글 번호)
+										<li class = "name">${id}<span>${cdate}</span></li> // 첫 줄에 아이디와 날짜. span 사용은 날짜 텍스트에 나중에 style 부여한듯.
+										<li class = "txt">${ccontent}</li> // 댓글 내용
+										<li class = "btn"> // button에 class 부여
+											<a class = "rebtn updateBtn">수정</a>
+											<a class = "rebtn deleteBtn">삭제</a>
+										</li>
+									</ul>
 								`;
-								// ul에 태그 넣기
-								ul.html(dataHtml);
-								flag = 0; // 수정 화면 닫힘.
-							});
+								console.log(dataHtml) // console창에 출력.
+								$(".replyBox").prepend(dataHtml); // 댓글 리스트에 제일 윗줄 추가.
+								// 이제 다음 번호의 댓글이 올라가야 하니,
+								cno ++ ; // 번호 1 증가
+
+
+							})
 
 							// 댓글 총 개수 변경 함수
-                            const c_count = function(flag){
+                            const c_count = function(flag){ // const는 고정 변수. c_count에 다음 신호값을 부여한다.
+
                                 let comment_count = Number($(".comment_count").text());
                                 if(flag==1){ // 댓글 추가 경우
                                     $(".comment_count").text(comment_count+1);
@@ -364,6 +270,7 @@ $(function(){
                                     $(".comment_count").text(comment_count-1);
                                 }
                             }//c_count
+
 
 							// 날짜 시간 함수
 							const todayTime = function(){
@@ -378,16 +285,20 @@ $(function(){
 								return `${year}-${month}-${day} ${hour}:${minute}:${second}`
 							}
 
-							
-						});//jquery
+						});//jquert\y
+
 					</script>
+
+
+
+					
 					<!-- 댓글-->
 					<div class="replyWrite">
 						<ul id="1">
 							<li class="in">
 								<p class="txt">총 <span class="orange comment_count">0</span> 개의 댓글이 달려있습니다.</p>
 								<p class="password">비밀번호&nbsp;&nbsp;<input type="password" class="replynum" /></p>
-								<textarea class="replyType replyTxt"></textarea>
+								<textarea class="replyType"></textarea>
 							</li>
 							<li class="btn">
 								<a class="replyBtn">등록</a></li>
@@ -395,6 +306,16 @@ $(function(){
 						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 					</div>
 					<div class="replyBox">
+
+						
+						<ul id="1">
+                            <li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+                            <li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
+                            <li class="btn">
+                                <a class="rebtn updateBtn">수정</a>
+                                <a class="rebtn deleteBtn">삭제</a>
+                            </li>
+                        </ul>
 
 
 					<!--댓글리스트

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 제이쿼리선언
+        $(function(){
+
+        });//jquery
+
+
+        // 정규표현식 : 문자열에서 특정 문자 조합을 찾기 위한 패턴
+        // 패턴 : /에서/로 끝난다.
+        // ^시작, $끝
+        // [해당되는 문자]
+        // [0-9]=[0123456789] : 0~9안의 숫자만 받겠다.
+        // [^123] : 123을 입력 받지 않겠다.
+        // {시작자리,끝자리} / {2} : 둘째자리까지 받겠다.
+        
+        function aBtn(){
+            let reg_age = /^[a]{1}[0-9]{4}$/; //a하나받고 0-9중 4개 받겠다.
+            //test()=> 맞으면 true, 틀리면 false
+            if(reg_age.test($("#age").val())){
+                alert("가능")
+            }else{
+                alert("불가능");
+            }
+        }
+        // 010-1111-1111
+        //let reg_age = /^.01{1}-[0-9]{4}-[0-9]{4}$/
+        //let reg_age = /^[01]{3}-[0-9]{4}-[0-9]{4}$/
+        //let reg_age = /^01[0-9]{1}-[0-9]{4}-[0-9]{4}$/
+
+        // 아이디 첫문자는 영문 소문자만 가능, 영, 숫자 가능 3자리 이상, 10자리 이하
+        //let reg_age = /^[a-z]{1}[a-zA-Z0-9]{2,9}$/
+        //let reg_age = /^[a-z]{1}\w{2,9}$/ // 약식 \w = a-zA-Z0-9
+
+    </script>
+</head>
+<body>
+    <label>년도
+        <input type="txt" name="age" id="age" placeholder="첫 글자는 영문자, 숫자 4개를 입력하시오."></label><br>
+        <input type="button" id="ageBtn" onclick="aBtn()" value="년도">
+    </label>
+</body>
+</html>

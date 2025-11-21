@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 제이쿼리선언
+        $(function(){
+            $("#age").keyup(function(e){
+
+                if(e.keyCode == 13){
+                    /*
+                    if($("#age").val().trim().length<4){
+                        alert("년도를 입력하세요.")
+                        return;
+                    }
+                    
+                    if(isNaN($("#age").val())){
+                        alert("숫자를 입력하셔야 합니다.")
+                    }
+                    */
+
+                    // 첫 글자는 영문자, 숫자 4개를 입력하시오. 예)a2025
+                    let age = $("#age").val();
+                    // 1. 5자리인지 확인.
+                    if(age.length<5){
+                        alert("5자리 이상 입력하세요!")
+                        return;
+                    }
+                    // 2. 첫 글자가 문자인지 확인
+                    console.log(age.substr(0,1)); // a
+                    if(!isNaN(age.substr(0,1))){
+                        alert("문자를 입력하셔야 합니다.");
+                        return;
+                    }
+                    // 3. 2~5번째까지 숫자인지 확인.
+                    console.log(age.substr(1)); // 2025
+                    
+                    if(isNaN(age.substr(1))){
+                        alert("숫자를 입력하셔야 합니다.");
+                        return;
+                    }
+                    console.log($("#age").val());
+                }
+            });//age
+
+            $("#ageBtn").click(function(){
+                alert("확인")
+                console.log($("#age").val());
+            })
+        });
+            
+        
+    </script>
+</head>
+<body>
+    <label>년도
+        <input type="txt" name="age" id="age" placeholder="첫 글자는 영문자, 숫자 4개를 입력하시오."></label><br>
+        <input type="button" id="ageBtn" value="년도">
+    </label>
+</body>
+</html>
