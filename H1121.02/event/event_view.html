@@ -18,15 +18,69 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
-
+<style>
+	a{cursor: pointer;}
+</style>
 <script type="text/javascript">
-$(function(){
+$(document).ready(function() {
 	
-});//jquery
+
+
+});
 </script>
-<style> a{cursor:pointer;}</style>
 </head>
 <body>
+
+
+
+<!--익스레이어팝업-->
+<div id="ieUser" style="display:none">
+	<div class="iewrap">	
+		<p class="img"><img src="../images/ico/ico_alert.gif" alt="알림" /></p>
+		<p class="txt">IE버전이 낮아 홈페이지 이용에 불편함이 있으므로 <strong>IE9이상이나 다른 브라우저</strong>를 이용해 주세요. </p>
+		<ul>
+			<li><a href="http://windows.microsoft.com/ko-kr/internet-explorer/download-ie" target="_blank"><img src="../images/ico/ico_ie.gif" alt="IE 최신브라우저 다운" ></a></li>
+			<li><a href="https://www.google.com/intl/ko/chrome/browser" target="_blank"><img src="../images/ico/ico_chrome.gif" alt="IE 최신브라우저 다운" ></a></li>
+			<li><a href="http://www.mozilla.org/ko/firefox/new" target="_blank"><img src="../images/ico/ico_mozila.gif" alt="MOZILA 최신브라우저 다운" ></a></li>
+			<li><a href="http://www.apple.com/safari" target="_blank"><img src="../images/ico/ico_safari.gif" alt="SAFARI 최신브라우저 다운" ></a></li>
+			<li><a href="http://www.opera.com/ko/o/ie-simple" target="_blank"><img src="../images/ico/ico_opera.gif" alt="OPERA 최신브라우저 다운" ></a></li>		
+		</ul>
+		<p class="btn" onclick="msiehide();"><img src="../images/ico/ico_close.gif" alt="닫기" /></p>
+	</div>
+</div>
+<!--//익스레이어팝업-->
+<!--IE 6,7,8 사용자에게 브라우저 업데이터 설명 Div 관련 스크립트-->
+ <script type="text/javascript">
+
+     var settimediv = 200000; //지속시간(1000= 1초)
+     var msietimer;
+
+     $(document).ready(function () {
+         msiecheck();
+     });
+
+     var msiecheck = function () {
+         var browser = navigator.userAgent.toLowerCase();
+         if (browser.indexOf('msie 6') != -1 ||
+                browser.indexOf('msie 7') != -1 ||
+				 browser.indexOf('msie 8') != -1) {
+             msieshow();			 
+         }
+         else {
+             msiehide();
+         }
+     }
+
+     var msieshow = function () {
+        $("#ieUser").show();
+        msietimer = setTimeout("msiehide()", settimediv);
+     }
+
+     var msiehide = function () {
+		$("#ieUser").hide();
+        clearTimeout(msietimer);
+     }
+</script>
 
 <div id="allwrap">
 <div id="wrap">
@@ -34,20 +88,20 @@ $(function(){
 	<div id="header">
 		
 		<div id="snbBox">
-			<h1><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></h1>
+			<h1><a href="/H1121.02/main.html"><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></a></h1>
 			<div id="quickmenu">
 				<div id="mnaviOpen"><img src="../images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
 				<div id="mnaviClose"><img src="../images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
 				<ul>
-					<li><a href="#">EVENT</a></li>
+					<li><a href="event.html">EVENT</a></li>
 					<li><a href="#">CUSTOMER</a></li>
 					<li><a href="#">COMMUNITY</a></li>
 				</ul>
 			</div>
 			<div id="snb">
 				<ul>
-					<li><a href="#">LOGIN</a></li>
-					<li><a href="#">JOIN</a></li>
+					<li><a href="../member/login.html">LOGIN</a></li>
+					<li><a href="/H1121.02/member/step01.html">JOIN</a></li>
 					<li><a href="#">MY PAGE</a></li>
 					<li><a href="#">CART</a></li>
 				</ul>
@@ -197,224 +251,159 @@ $(function(){
 						</table>
 					</div>
 					<!-- //이전다음글 -->
-
-
-
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-
-
-
-
-
 					<script>
-						// 전역 변수
-						let cno = 1;
-						let flag = 0;
-						let id;
-						let cdate;
-						let ccontent;
-						let cpw;
+						// 전역변수
+						let cno = 2; // 하단 댓글 시작 번호
+						let id = 'zzz';
+						let cpw, ccontent, cdate;
+						let flag=0;
 
 						$(function(){
-
-							// keyCode 함수
-							$(".replyTxt").keyup(function(e){
-								console.log(e.keyCode);
-								if(e.keyCode == 13)
-								$(this).closest("ul").find(".replyBtn").click();
-							});
-
-							// 1. 등록 버튼 클릭 함수
-							$(".replyBtn").click(function(){
-								if(flag !=0){
-									alert("댓글 수정 화면을 닫아야 수정이 가능합니다.")
-									return;
-								}
-
+							// 1. 댓글 등록
+							$(document).on("click",".replyBtn",function(){
 								let ul = $(this).closest("ul");
-								// 댓글 내용 확인
-								if (ul.find(".replyType").val().length<=0){
-									alert("댓글 내용을 입력하셔야 저장이 가능합니다.");
-									ul.find(".replyType").focus();
-									return;
-								} // 댓글 정보
-								id = "aaa";
 								cpw = ul.find(".replynum").val();
 								ccontent = ul.find(".replyType").val();
-								cdate = todayTime();
-								// 댓글 출력
-								let dataHtml = ``;
-								
-								dataHtml += `
-								<!-- 댓글 리스트 -->
-									<ul id="${cno}">
-										<li class="name">${id} <span>[${cdate}9]</span></li>
-										<li class="txt">${ccontent}</li>
-										<li class="btn">
-											<a class="rebtn updateBtn">수정</a>
-											<a class="rebtn deleteBtn">삭제</a>
-										</li>
-									</ul>`;
-								console.log(dataHtml)	
-								// 댓글 리스트 앞에 추가
-								$(".replyBox").prepend(dataHtml);
-								cno++; //1 증가
-								//댓글 총 개수 1 증가
-								
-								c_count(1); // 함수 호출 - 
-								ul.find(".replynum").val('');
-								ul.find(".replyType").val('');
-								alert("하단 댓글을 저장합니다.")
-								//console.log($(this).closest("ul").find(".replynum").val())
-								// 현재 위치점에서 가장 가까운 ul을 찾아서 .replynum을 찾아 그 안의 input값을 가져와라.
-								//console.log($(this).closest("ul").find(".replyType").val())
-							});//replyBtn
-							
-							// 2. 삭제 버튼 클릭 함수
-							$(document).on("click",".deleteBtn",function(){
-                                const ul = $(this).closest("ul");
-                                console.log(ul.attr("id"));
-                                if(confirm(ul.attr("id")+"번 댓글을 삭제하시겠습니까?")){ //attr:속성
-                                    ul.remove();
-                                }
-								// 함수 호출 - 댓글 총 개수 1 삭제
-								c_count(2); 
-                            });//deleteBtn
-
-							// 3. 수정 버튼 클릭 함수
-							$(document).on("click",".updateBtn",function(){
-								if(flag !=0){
-									alert("다른 댓글 수정 화면을 닫아야 수정이 가능합니다.")
-									return;
-								}
-								alert("댓글을 수정합니다.")
-								const ul = $(this).closest("ul");
-                                console.log(ul.attr("id"));
-
-								// 데이터 가져오기 id, cno, cdate, txt
-								let id = ul.find(".name").text().split(" ")[0]
-								let cdate = ul.find("span").text()
-								let ccontent = (ul.find(".txt").text());
-
-								let dataHtml = `
-							
-								<li class="name">${id} <span>${cdate}</span></li>
-								<li class="txt"><textarea class="replyType">${ccontent}</textarea></li>
-								<li class="btn">
-									<a class="rebtn uSaveBtn">저장</a>
-									<a class="rebtn cancleBtn">취소</a>
-								</li>`;
-								// 수정 화면 태그 입력
-								$(this).closest("ul").html(dataHtml);
-								flag = 1; // 수정 화면이 열림
-							});//updateBtn
-
-							// 4. 수정 취소 버튼 클릭 함수
-							$(document).on("click",".cancleBtn",function(){
-								alert("수정취소버튼")
-								const ul = $(this).closest("ul");
-                                console.log(ul.attr("id"));
-								//기존 저장되어 있는 데이터 사용 - id, cdate, ccountent
+								cdate = today()
+								console.log(cpw, ccontent, cdate);
 								let dataHtml = 
-								`<li class="name">${id} <span>[${cdate}9]</span></li>
-										<li class="txt">${ccontent}</li>
-										<li class="btn">
-											<a class="rebtn updateBtn">수정</a>
-											<a class="rebtn deleteBtn">삭제</a>
-										</li>`;
-								ul.html(dataHtml);
-								flag = 0; // 수정 화면 닫힘.
-							});//cancleBtn
-
-							// 5. 수정 저장 버튼 클릭 함수
-							$(document).on("click",".uSaveBtn",function(){
-								alert("댓글을 수정했습니다.")
-								const ul = $(this).closest("ul");
-                                // 수정 댓글 가져오기
-								console.log(ul.find(".replyType").val());
-								cdate = todayTime(); // 수정 날짜 추가
-								ccontent = ul.find(".replyType").val()
-								let dataHtml = 
-								`
-								<li class="name">${id} <span>[${cdate}]</span></li>
+								`<ul id="${cno}">
+									<li class="name">${id}<span>${cdate}</span></li>
 									<li class="txt">${ccontent}</li>
 									<li class="btn">
 										<a class="rebtn updateBtn">수정</a>
 										<a class="rebtn deleteBtn">삭제</a>
 									</li>
+								</ul>
 								`;
-								// ul에 태그 넣기
-								ul.html(dataHtml);
-								flag = 0; // 수정 화면 닫힘.
-							});
+								$(".replyBox").prepend(dataHtml);
+								cno++; // 댓글 등록이 되면 번호 1 증가
+								input_delete();
+								alert("하단 댓글을 등록합니다.")
+							});//replyBtn
 
-							// 댓글 총 개수 변경 함수
-                            const c_count = function(flag){
-                                let comment_count = Number($(".comment_count").text());
-                                if(flag==1){ // 댓글 추가 경우
-                                    $(".comment_count").text(comment_count+1);
-                                }else{       // 댓글 삭제 경우
-                                    $(".comment_count").text(comment_count-1);
-                                }
-                            }//c_count
+							// 2. 댓글 삭제
+							$(document).on("click",".deleteBtn", function(){
+								let ul = $(this).closest("ul");
+								let no = ul.attr("id");
+								if(confirm(no+"번 댓글을 삭제하시겠습니까?")){
+									ul.remove();
+								}
+							});//deleteBtn
 
-							// 날짜 시간 함수
-							const todayTime = function(){
-								let now = new Date(); //날짜객체선언
+							// 3. 수정 버튼 클릭 함수
+							$(document).on("click",".updateBtn", function(){
+								if(flag==1){
+									alert("타 댓글 수정창을 확인하십시오.")
+									return;
+								}
+								let ul = $(this).closest("ul");
+								let no = ul.attr("id");
+								cdate = ul.find("span").text();
+								ccontent = ul.find(".txt").text();
+								let dataHtml = 
+								`
+								<li class="name">${id}<span>${cdate}</span></li>
+								<li class="txt"><textarea class="replyType">${ccontent}</textarea></li>
+								<li class="btn">
+									<a class="rebtn usaveBtn">완료</a>
+									<a class="rebtn ucancleBtn">취소</a>
+								</li>
+								`;
+								$("#"+no).html(dataHtml); // 수정 화면 변경
+								flag = 1;
+							});//updateBtn
+
+							// 4. 수정 취소 버튼 클릭 함수
+							$(document).on("click", ".ucancleBtn", function(){
+								flag = 0;
+								let ul = $(this).closest("ul");
+								let no = ul.attr("id");
+								let dataHtml = 
+								`
+								<li class="name">${id}<span>${cdate}</span></li>
+								<li class="txt">${ccontent}</li>
+								<li class="btn">
+									<a class="rebtn updateBtn">수정</a>
+									<a class="rebtn deleteBtn">삭제</a>
+								</li>
+								`;
+								$("#"+no).html(dataHtml);
+								alert("댓글 수정을 취소합니다.");
+							});//ucancleBtn
+
+							// 5. 수정 완료 버튼 클릭 함수
+							$(document).on("click",".usaveBtn", function(){
+								flag = 0;
+								let ul = $(this).closest("ul");
+								let no = ul.attr("id");
+								ccontent = ul.find(".replyType").val()
+								cdate = today();
+								let dataHtml = 
+								`
+								<li class="name">${id}<span>${cdate}</span></li>
+								<li class="txt">${ccontent}</li>
+								<li class="btn">
+									<a class="rebtn updateBtn">수정</a>
+									<a class="rebtn deleteBtn">삭제</a>
+								</li>
+								`;
+								$("#"+no).html(dataHtml);
+								alert("댓글 수정을 완료했습니다.")
+							})
+
+
+							
+							// 입력창 지우기 함수
+							const input_delete = function(){
+								$(".replynum").val("");
+								$(".replyType").val("");
+							};
+
+							// 현재 날짜 가져오기 함수 
+							const today = function(){
+								let now = new Date();
 								let year = now.getFullYear();
-								let month = now.getMonth()+1 //0월, 1월...
-								let day = now.getDate(); //day:요일 date:날짜 
+								let month = now.getMonth()+1;
+								let day = now.getDate();
 								let hour = now.getHours();
 								let minute = now.getMinutes();
 								let second = now.getSeconds();
-
-								return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+								return `&nbsp;&nbsp;${year}-${month}-${day}&nbsp;&nbsp;${hour}:${minute}:${second}`
 							}
-
-							
 						});//jquery
 					</script>
+
 					<!-- 댓글-->
 					<div class="replyWrite">
-						<ul id="1">
+						<ul>
 							<li class="in">
-								<p class="txt">총 <span class="orange comment_count">0</span> 개의 댓글이 달려있습니다.</p>
+								<p class="txt">총 <span class="orange">3</span> 개의 댓글이 달려있습니다.</p>
 								<p class="password">비밀번호&nbsp;&nbsp;<input type="password" class="replynum" /></p>
-								<textarea class="replyType replyTxt"></textarea>
+								<textarea class="replyType"></textarea>
 							</li>
-							<li class="btn">
-								<a class="replyBtn">등록</a></li>
+							<li class="btn"><a class="replyBtn">등록</a></li>
 						</ul>
 						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 					</div>
+
 					<div class="replyBox">
-
-
-					<!--댓글리스트
 						<ul id="1">
-                            <li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+                            <li class="name">zzz <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
                             <li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
                             <li class="btn">
                                 <a class="rebtn updateBtn">수정</a>
                                 <a class="rebtn deleteBtn">삭제</a>
                             </li>
-                        </ul>-->
-						
+                        </ul>
 
 						<!--
-						<ul> 댓글수정부분
+						<ul> 수정창
 							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
 							<li class="txt"><textarea class="replyType"></textarea></li>
 							<li class="btn">
-								<a class="rebtn uSaveBtn">수정wjwkd</a>
-								<a class="rebtn cancleBtn">삭제</a>
+								<a href="#" class="rebtn">완료</a>
+								<a href="#" class="rebtn">취소</a>
 							</li>
 						</ul>
 
@@ -424,24 +413,8 @@ $(function(){
 								<a href="password.html" class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
 							</li>
 						</ul>
-					-->
-
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
-
-
+						-->
 					</div>
-					<script>
-						$(function(){
-
-						})
-					</script>
 					<!-- //댓글 -->
 
 
@@ -449,7 +422,7 @@ $(function(){
 					<div class="btnArea">
 						<div class="bRight">
 							<ul>
-								<li><a class="sbtnMini mw">목록</a></li>
+								<li><a href="#" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
 					</div>
